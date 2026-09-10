@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Bluetooth — Connect to Phone</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg-1: #eef2fb;
+            --bg-2: #e2e8f6;
+            --ink: #16233d;
+            --ink-soft: #51617f;
+            --line: #dfe6f2;
+            --accent: #2f6bff;
+            --accent-2: #1d4fd7;
+            --card: rgba(255, 255, 255, 0.86);
+            --mono: ui-monospace, 'SF Mono', 'Cascadia Code', 'JetBrains Mono', Menlo, Consolas, monospace;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            color: var(--ink);
+            background:
+                radial-gradient(1200px 600px at 12% -10%, #ffffff 0%, transparent 55%),
+                radial-gradient(1000px 520px at 100% 0%, #dbe6ff 0%, transparent 50%),
+                linear-gradient(160deg, var(--bg-1) 0%, var(--bg-2) 100%);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .card {
+            max-width: 760px;
+            width: 100%;
+            background: var(--card);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow:
+                0 30px 60px -20px rgba(23, 35, 66, 0.25),
+                0 10px 24px -12px rgba(23, 35, 66, 0.12);
+            border-radius: 28px;
+            border: 1px solid rgba(255, 255, 255, 0.65);
+            padding: 32px 34px 36px;
+        }
+
+        .head {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 6px;
+        }
+
+        .logo {
+            width: 46px;
+            height: 46px;
+            border-radius: 14px;
+            display: grid;
+            place-items: center;
+            font-size: 1.4rem;
+            background: linear-gradient(135deg, #2f6bff, #6a5bff);
+            box-shadow: 0 10px 22px -8px rgba(47, 107, 255, 0.55);
+        }
+
+        h1 {
+            font-weight: 700;
+            font-size: 1.65rem;
+            letter-spacing: -0.025em;
+        }
+
+        .subtitle {
+            color: var(--ink-soft);
+            font-size: 0.9rem;
+            margin-bottom: 26px;
+            line-height: 1.6;
+        }
+
+        .subtitle code {
+            background: #eaf0ff;
+            color: #244dbd;
+            padding: 2px 7px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-family: var(--mono);
+        }
+
+        .field {
+            margin-bottom: 14px;
+        }
+
+        .field label {
+            display: block;
+            font-size: 0.78rem;
+            font-weight: 650;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+            color: var(--ink-soft);
+            margin-bottom: 6px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            border: 1.5px solid var(--line);
+            border-radius: 12px;
+            padding: 12px 16px;
+            font-size: 0.88rem;
+            outline: none;
+            background: #fff;
+            color: var(--ink);
+            font-family: var(--mono);
+            transition: border-color 0.18s, box-shadow 0.18s;
+        }
+
+        input[type="text"]:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 4px rgba(47, 107, 255, 0.12);
+        }
+
+        .btn-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 22px 0;
+        }
+
+        button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #fff;
+            border: 1.5px solid var(--line);
+            color: var(--ink);
+            font-weight: 600;
+            padding: 11px 18px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: transform 0.12s, box-shadow 0.12s, background 0.12s, border-color 0.12s;
+            box-shadow: 0 2px 6px -2px rgba(23, 35, 66, 0.18);
+        }
+
+        button:hover:not(:disabled) {
+            border-color: #b9c9e4;
+            transform: translateY(-1px);
+            box-shadow: 0 8px 18px -8px rgba(23, 35, 66, 0.35);
+        }
+
+        button:active:not(:disabled) {
+            transform: translateY(0);
+        }
+
+        button:disabled {
+            opacity: 0.45;
+            cursor: not-allowed;
+        }
+
+        button.primary {
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            border-color: transparent;
+            color: #fff;
+            box-shadow: 0 10px 22px -10px rgba(47, 107, 255, 0.7);
+        }
+
+        button.primary:hover:not(:disabled) {
+            filter: brightness(1.05);
+        }
+
+        .send-row {
+            display: flex;
+            gap: 10px;
+        }
+
+        .send-row input {
+            flex: 1;
+        }
+
+        .status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #f6f9ff;
+            border: 1px solid var(--line);
+            border-left: 4px solid var(--accent);
+            border-radius: 12px;
+            padding: 13px 16px;
+            font-family: var(--mono);
+            font-size: 0.84rem;
+            color: #1c3b5c;
+            line-height: 1.6;
+            min-height: 54px;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+
+        .status::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #aab8d0;
+            flex: none;
+        }
+
+        .status.connected::before {
+            background: #22c55e;
+            box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.15);
+        }
+
+        .log {
+            margin-top: 16px;
+            max-height: 220px;
+            overflow-y: auto;
+            background: #0f172a;
+            color: #c9d7e8;
+            border-radius: 14px;
+            padding: 15px 18px;
+            font-family: var(--mono);
+            font-size: 0.8rem;
+            line-height: 1.7;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+
+        .note {
+            margin-top: 18px;
+            color: #51617f;
+            font-size: 0.82rem;
+            line-height: 1.7;
+            background: #f1f5fd;
+            border: 1px dashed #cbd6e4;
+            border-radius: 12px;
+            padding: 14px 16px;
+        }
+
+        @media (max-width: 520px) {
+            .card { padding: 22px 20px 26px; border-radius: 22px; }
+            h1 { font-size: 1.35rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="head">
+            <div class="logo">🔵</div>
+            <h1>Web Bluetooth</h1>
+        </div>
+        <p class="subtitle">
+            Connect to your phone over BLE. Works in <b>Chrome / Edge / Android Chrome</b>
+            (not Safari or Firefox). Your phone must be <b>advertising</b> as a BLE peripheral.
+            Scanning filters by the <b>Service UUID</b> below, so only devices broadcasting that UUID will appear.
+        </p>
+
+        <div class="field">
+            <label>Service UUID</label>
+            <input type="text" id="serviceUuidInput" value="8f6d7f58-9ed7-4a95-8e09-5b4b8b8d1f10">
+        </div>
+        <div class="field">
+            <label>Receive Characteristic</label>
+            <input type="text" id="charUuidInput" value="4a38a38b-b6d9-43cc-8c02-44d4605dd002">
+        </div>
+        <div class="field">
+            <label>Send Characteristic</label>
+            <input type="text" id="txCharUuidInput" value="4a38a38b-b6d9-43cc-8c02-44d4605dd002">
+        </div>
+
+        <div class="btn-row">
+            <button id="connectBtn" class="primary">📱 Scan &amp; Connect</button>
+            <button id="listBtn" disabled>📋 List Characteristics</button>
+            <button id="readBtn" disabled>📖 Read</button>
+            <button id="notifyBtn" disabled>🔔 Enable Notifications</button>
+            <button id="disconnectBtn" disabled>🔌 Disconnect</button>
+        </div>
+
+        <div class="send-row field">
+            <input type="text" id="sendInput" placeholder="Type text to send to the phone…">
+            <button id="sendBtn" disabled>📤 Send</button>
+        </div>
+
+        <div class="status" id="status">Not connected yet</div>
+
+        <div class="log" id="log">— Log —</div>
+
+        <p class="note">
+            Tips:<br>
+            1. A user gesture (button click) is required — browsers cannot auto-open the device picker.<br>
+            2. The page must be served over <code>https://</code> or <code>localhost</code>.<br>
+            3. The Service / Characteristic UUIDs above must exactly match what the phone advertises and exposes in its GATT.
+        </p>
+    </div>
+
+    <script>
+        const serviceUuidInput = document.getElementById('serviceUuidInput');
+        const charUuidInput = document.getElementById('charUuidInput');
+        const txCharUuidInput = document.getElementById('txCharUuidInput');
+
+        const statusEl = document.getElementById('status');
+        const logEl = document.getElementById('log');
+        const connectBtn = document.getElementById('connectBtn');
+        const listBtn = document.getElementById('listBtn');
+        const readBtn = document.getElementById('readBtn');
+        const notifyBtn = document.getElementById('notifyBtn');
+        const disconnectBtn = document.getElementById('disconnectBtn');
+        const sendInput = document.getElementById('sendInput');
+        const sendBtn = document.getElementById('sendBtn');
+
+        let device = null;           // BluetoothDevice
+        let server = null;           // BluetoothRemoteGATTServer
+        let characteristic = null;   // receive characteristic (read / notify)
+        let txCharacteristic = null; // send characteristic (write)
+        let currentService = null;   // current service, used to list characteristics
+
+        function log(msg) {
+            const time = new Date().toLocaleTimeString();
+            logEl.textContent += `\n[${time}] ${msg}`;
+            logEl.scrollTop = logEl.scrollHeight;
+        }
+
+        function setStatus(msg, ok = false) {
+            statusEl.textContent = msg;
+            statusEl.classList.toggle('connected', ok);
+            log(msg);
+        }
+
+        // Watch for disconnects
+        function watchDisconnect() {
+            device.addEventListener('gattserverdisconnected', () => {
+                setStatus('Device disconnected');
+                updateButtons(false);
+            });
+        }
+
+        function updateButtons(connected) {
+            readBtn.disabled = !connected;
+            notifyBtn.disabled = !connected;
+            disconnectBtn.disabled = !connected;
+            listBtn.disabled = !connected;
+            connectBtn.disabled = connected;
+            sendBtn.disabled = !connected || !txCharacteristic;
+        }
+
+        // 1. Scan & connect
+        connectBtn.addEventListener('click', async () => {
+            if (!navigator.bluetooth) {
+                setStatus('This browser does not support Web Bluetooth');
+                return;
+            }
+
+            try {
+                setStatus('Scanning… choose your device in the popup');
+
+                const SERVICE_UUID = serviceUuidInput.value.trim().toLowerCase();
+                const CHAR_UUID = charUuidInput.value.trim().toLowerCase();
+                const TX_CHAR_UUID = txCharUuidInput.value.trim().toLowerCase();
+
+                if (!SERVICE_UUID || !CHAR_UUID) {
+                    setStatus('Please fill in the Service UUID and Characteristic UUID first');
+                    return;
+                }
+
+                device = await navigator.bluetooth.requestDevice({
+                    filters: [{ services: [SERVICE_UUID] }],
+                    optionalServices: [SERVICE_UUID]
+                });
+
+                log(`Selected device: ${device.name || '(unknown name)'} (${device.id})`);
+
+                server = await device.gatt.connect();
+                setStatus('GATT connected');
+
+                currentService = await server.getPrimaryService(SERVICE_UUID);
+                log(`Got service: ${currentService.uuid}`);
+
+                characteristic = await currentService.getCharacteristic(CHAR_UUID);
+                log(`Got receive characteristic: ${characteristic.uuid}`);
+
+                try {
+                    txCharacteristic = await currentService.getCharacteristic(TX_CHAR_UUID);
+                    log(`Got send characteristic: ${txCharacteristic.uuid}`);
+                } catch (e) {
+                    txCharacteristic = null;
+                    log(`Send characteristic ${TX_CHAR_UUID} not found — sending is disabled`);
+                }
+
+                setStatus('Connected. You can read and subscribe now.', true);
+                updateButtons(true);
+                watchDisconnect();
+            } catch (err) {
+                setStatus(`Connection failed: ${err.message}`);
+            }
+        });
+
+        // 2. Read
+        readBtn.addEventListener('click', async () => {
+            try {
+                const value = await characteristic.readValue(); // DataView
+                const text = new TextDecoder().decode(value);
+                setStatus(`Read ${value.byteLength} byte(s): "${text}"`);
+            } catch (err) {
+                setStatus(`Read failed: ${err.message}`);
+            }
+        });
+
+        // 2.5 List all characteristics (debug helper)
+        listBtn.addEventListener('click', async () => {
+            try {
+                const chars = await currentService.getCharacteristics();
+                log(`This service has ${chars.length} characteristic(s):`);
+                for (const c of chars) {
+                    const props = [];
+                    if (c.properties.read) props.push('read');
+                    if (c.properties.write) props.push('write');
+                    if (c.properties.writeWithoutResponse) props.push('writeWithoutResponse');
+                    if (c.properties.notify) props.push('notify');
+                    log(`  ${c.uuid}  [${props.join(', ') || 'none'}]`);
+                }
+                setStatus('Listed all characteristics — copy the UUIDs into the fields above');
+            } catch (err) {
+                setStatus(`List failed: ${err.message}`);
+            }
+        });
+
+        // 2.6 Send (write) to the phone
+        sendBtn.addEventListener('click', async () => {
+            const text = sendInput.value;
+            if (!text) return;
+            if (!txCharacteristic) {
+                setStatus('No writable characteristic — connect first or check the "Send Characteristic" UUID');
+                return;
+            }
+            try {
+                const data = new TextEncoder().encode(text);
+                await txCharacteristic.writeValue(data);
+                setStatus(`Sent ${data.length} byte(s): "${text}"`);
+                sendInput.value = '';
+            } catch (err) {
+                setStatus(`Send failed: ${err.message}`);
+            }
+        });
+
+        // 3. Subscribe to notifications
+        notifyBtn.addEventListener('click', async () => {
+            try {
+                await characteristic.startNotifications();
+                setStatus('Notifications enabled — waiting for data…');
+
+                characteristic.addEventListener('characteristicvaluechanged', (e) => {
+                    const text = new TextDecoder().decode(e.target.value);
+                    setStatus(`Notification (${e.target.value.byteLength} byte(s)): "${text}"`);
+                });
+            } catch (err) {
+                setStatus(`Enable notifications failed: ${err.message}`);
+            }
+        });
+
+        // 4. Disconnect
+        disconnectBtn.addEventListener('click', () => {
+            if (device && device.gatt.connected) {
+                device.gatt.disconnect();
+                setStatus('Disconnected manually');
+                updateButtons(false);
+            }
+        });
+    </script>
+</body>
+</html>

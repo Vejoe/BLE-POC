@@ -278,6 +278,9 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2,7";
 				XROS_DEPLOYMENT_TARGET = 26.5;
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Used to scan for and connect to nearby Bluetooth devices.";
+				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "Used to advertise a Bluetooth service to nearby devices.";
+				DEVELOPMENT_TEAM = LQ6G4Q3GKQ;
 			};
 			name = Debug;
 		};
@@ -318,8 +321,11 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Used to scan for and connect to nearby Bluetooth devices.";
+				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "Used to advertise a Bluetooth service to nearby devices.";
 				TARGETED_DEVICE_FAMILY = "1,2,7";
 				XROS_DEPLOYMENT_TARGET = 26.5;
+				DEVELOPMENT_TEAM = LQ6G4Q3GKQ;
 			};
 			name = Release;
 		};
