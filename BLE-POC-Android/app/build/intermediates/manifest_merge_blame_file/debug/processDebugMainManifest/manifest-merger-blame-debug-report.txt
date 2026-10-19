@@ -1,0 +1,176 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.vejoe.blepoc"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="26"
+9        android:targetSdkVersion="35" />
+10
+11    <uses-feature
+11-->/Users/vejoe/Code/Swift/BLE-POC-Android/app/src/main/AndroidManifest.xml:4:5-6:35
+12        android:name="android.hardware.bluetooth_le"
+12-->/Users/vejoe/Code/Swift/BLE-POC-Android/app/src/main/AndroidManifest.xml:5:9-53
+13        android:required="true" />
+13-->/Users/vejoe/Code/Swift/BLE-POC-Android/app/src/main/AndroidManifest.xml:6:9-32
+14
+15    <!-- Android 12+ -->
+16    <uses-permission
+16-->/Users/vejoe/Code/Swift/BLE-POC-Android/app/src/main/AndroidManifest.xml:9:5-11:58
+17        android:name="android.permission.BLUETOOTH_SCAN"
+17-->/Users/vejoe/Code/Swift/BLE-POC-Android/app/src/main/AndroidManifest.xml:10:9-57
+18        android:usesPermissionFlags="neverForLocation" />
+18-->/Users/vejoe/Code/Swift/BLE-POC-Android/app/src/main/AndroidManifest.xml:11:9-55
+19    <uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE" />
+19-->/Users/vejoe/Code/Swift/BLE-POC-Android/app/src/main/AndroidManifest.xml:12:5-78
+19-->/Users/vejoe/Code/Swift/BLE-POC-Android/app/src/main/AndroidManifest.xml:12:22-75
+20    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+20-->/Users/vejoe/Code/Swift/BLE-POC-Android/app/src/main/AndroidManifest.xml:13:5-76
+20-->/Users/vejoe/Code/Swift/BLE-POC-Android/app/src/main/AndroidManifest.xml:13:22-73
+21
+22    <!-- Android 11 and below -->
+23    <uses-permission
+23-->/Users/vejoe/Code/Swift/BLE-POC-Android/app/src/main/AndroidManifest.xml:16:5-18:38
+24        android:name="android.permission.BLUETOOTH"
+24-->/Users/vejoe/Code/Swift/BLE-POC-Android/app/src/main/AndroidManifest.xml:17:9-52
+25        android:maxSdkVersion="30" />
+25-->/Users/vejoe/Code/Swift/BLE-POC-Android/app/src/main/AndroidManifest.xml:18:9-35
+26    <uses-permission
+26-->/Users/vejoe/Code/Swift/BLE-POC-Android/app/src/main/AndroidManifest.xml:19:5-21:38
+27        android:name="android.permission.BLUETOOTH_ADMIN"
+27-->/Users/vejoe/Code/Swift/BLE-POC-Android/app/src/main/AndroidManifest.xml:20:9-58
+28        android:maxSdkVersion="30" />
+28-->/Users/vejoe/Code/Swift/BLE-POC-Android/app/src/main/AndroidManifest.xml:21:9-35
+29    <uses-permission
+29-->/Users/vejoe/Code/Swift/BLE-POC-Android/app/src/main/AndroidManifest.xml:22:5-24:38
+30        android:name="android.permission.ACCESS_FINE_LOCATION"
+30-->/Users/vejoe/Code/Swift/BLE-POC-Android/app/src/main/AndroidManifest.xml:23:9-63
+31        android:maxSdkVersion="30" />
+31-->/Users/vejoe/Code/Swift/BLE-POC-Android/app/src/main/AndroidManifest.xml:24:9-35
+32
+33    <permission
+33-->[androidx.core:core:1.13.1] /Users/vejoe/.gradle/caches/8.9/transforms/3f4414e7258e46b34c51e68305e2ec6f/transformed/core-1.13.1/AndroidManifest.xml:22:5-24:47
+34        android:name="com.vejoe.blepoc.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+34-->[androidx.core:core:1.13.1] /Users/vejoe/.gradle/caches/8.9/transforms/3f4414e7258e46b34c51e68305e2ec6f/transformed/core-1.13.1/AndroidManifest.xml:23:9-81
+35        android:protectionLevel="signature" />
+35-->[androidx.core:core:1.13.1] /Users/vejoe/.gradle/caches/8.9/transforms/3f4414e7258e46b34c51e68305e2ec6f/transformed/core-1.13.1/AndroidManifest.xml:24:9-44
+36
+37    <uses-permission android:name="com.vejoe.blepoc.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+37-->[androidx.core:core:1.13.1] /Users/vejoe/.gradle/caches/8.9/transforms/3f4414e7258e46b34c51e68305e2ec6f/transformed/core-1.13.1/AndroidManifest.xml:26:5-97
+37-->[androidx.core:core:1.13.1] /Users/vejoe/.gradle/caches/8.9/transforms/3f4414e7258e46b34c51e68305e2ec6f/transformed/core-1.13.1/AndroidManifest.xml:26:22-94
+38
+39    <application
+39-->/Users/vejoe/Code/Swift/BLE-POC-Android/app/src/main/AndroidManifest.xml:26:5-44:19
+40        android:allowBackup="true"
+40-->/Users/vejoe/Code/Swift/BLE-POC-Android/app/src/main/AndroidManifest.xml:27:9-35
+41        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+41-->[androidx.core:core:1.13.1] /Users/vejoe/.gradle/caches/8.9/transforms/3f4414e7258e46b34c51e68305e2ec6f/transformed/core-1.13.1/AndroidManifest.xml:28:18-86
+42        android:debuggable="true"
+43        android:extractNativeLibs="false"
+44        android:icon="@mipmap/ic_launcher"
+44-->/Users/vejoe/Code/Swift/BLE-POC-Android/app/src/main/AndroidManifest.xml:28:9-43
+45        android:label="@string/app_name"
+45-->/Users/vejoe/Code/Swift/BLE-POC-Android/app/src/main/AndroidManifest.xml:29:9-41
+46        android:roundIcon="@mipmap/ic_launcher_round"
+46-->/Users/vejoe/Code/Swift/BLE-POC-Android/app/src/main/AndroidManifest.xml:30:9-54
+47        android:supportsRtl="true"
+47-->/Users/vejoe/Code/Swift/BLE-POC-Android/app/src/main/AndroidManifest.xml:31:9-35
+48        android:theme="@style/Theme.BlePoc" >
+48-->/Users/vejoe/Code/Swift/BLE-POC-Android/app/src/main/AndroidManifest.xml:32:9-44
+49        <activity
+49-->/Users/vejoe/Code/Swift/BLE-POC-Android/app/src/main/AndroidManifest.xml:34:9-43:20
+50            android:name="com.vejoe.blepoc.MainActivity"
+50-->/Users/vejoe/Code/Swift/BLE-POC-Android/app/src/main/AndroidManifest.xml:35:13-41
+51            android:exported="true"
+51-->/Users/vejoe/Code/Swift/BLE-POC-Android/app/src/main/AndroidManifest.xml:36:13-36
+52            android:label="@string/app_name"
+52-->/Users/vejoe/Code/Swift/BLE-POC-Android/app/src/main/AndroidManifest.xml:37:13-45
+53            android:theme="@style/Theme.BlePoc" >
+53-->/Users/vejoe/Code/Swift/BLE-POC-Android/app/src/main/AndroidManifest.xml:38:13-48
+54            <intent-filter>
+54-->/Users/vejoe/Code/Swift/BLE-POC-Android/app/src/main/AndroidManifest.xml:39:13-42:29
+55                <action android:name="android.intent.action.MAIN" />
+55-->/Users/vejoe/Code/Swift/BLE-POC-Android/app/src/main/AndroidManifest.xml:40:17-69
+55-->/Users/vejoe/Code/Swift/BLE-POC-Android/app/src/main/AndroidManifest.xml:40:25-66
+56
+57                <category android:name="android.intent.category.LAUNCHER" />
+57-->/Users/vejoe/Code/Swift/BLE-POC-Android/app/src/main/AndroidManifest.xml:41:17-77
+57-->/Users/vejoe/Code/Swift/BLE-POC-Android/app/src/main/AndroidManifest.xml:41:27-74
+58            </intent-filter>
+59        </activity>
+60        <activity
+60-->[androidx.compose.ui:ui-tooling-android:1.7.5] /Users/vejoe/.gradle/caches/8.9/transforms/75da1d9fd0a9568c8027ba85e7b60180/transformed/ui-tooling-release/AndroidManifest.xml:23:9-25:39
+61            android:name="androidx.compose.ui.tooling.PreviewActivity"
+61-->[androidx.compose.ui:ui-tooling-android:1.7.5] /Users/vejoe/.gradle/caches/8.9/transforms/75da1d9fd0a9568c8027ba85e7b60180/transformed/ui-tooling-release/AndroidManifest.xml:24:13-71
+62            android:exported="true" />
+62-->[androidx.compose.ui:ui-tooling-android:1.7.5] /Users/vejoe/.gradle/caches/8.9/transforms/75da1d9fd0a9568c8027ba85e7b60180/transformed/ui-tooling-release/AndroidManifest.xml:25:13-36
+63
+64        <provider
+64-->[androidx.emoji2:emoji2:1.3.0] /Users/vejoe/.gradle/caches/8.9/transforms/e9a4de5f87829d8e56de87ff35dfed60/transformed/emoji2-1.3.0/AndroidManifest.xml:24:9-32:20
+65            android:name="androidx.startup.InitializationProvider"
+65-->[androidx.emoji2:emoji2:1.3.0] /Users/vejoe/.gradle/caches/8.9/transforms/e9a4de5f87829d8e56de87ff35dfed60/transformed/emoji2-1.3.0/AndroidManifest.xml:25:13-67
+66            android:authorities="com.vejoe.blepoc.androidx-startup"
+66-->[androidx.emoji2:emoji2:1.3.0] /Users/vejoe/.gradle/caches/8.9/transforms/e9a4de5f87829d8e56de87ff35dfed60/transformed/emoji2-1.3.0/AndroidManifest.xml:26:13-68
+67            android:exported="false" >
+67-->[androidx.emoji2:emoji2:1.3.0] /Users/vejoe/.gradle/caches/8.9/transforms/e9a4de5f87829d8e56de87ff35dfed60/transformed/emoji2-1.3.0/AndroidManifest.xml:27:13-37
+68            <meta-data
+68-->[androidx.emoji2:emoji2:1.3.0] /Users/vejoe/.gradle/caches/8.9/transforms/e9a4de5f87829d8e56de87ff35dfed60/transformed/emoji2-1.3.0/AndroidManifest.xml:29:13-31:52
+69                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+69-->[androidx.emoji2:emoji2:1.3.0] /Users/vejoe/.gradle/caches/8.9/transforms/e9a4de5f87829d8e56de87ff35dfed60/transformed/emoji2-1.3.0/AndroidManifest.xml:30:17-75
+70                android:value="androidx.startup" />
+70-->[androidx.emoji2:emoji2:1.3.0] /Users/vejoe/.gradle/caches/8.9/transforms/e9a4de5f87829d8e56de87ff35dfed60/transformed/emoji2-1.3.0/AndroidManifest.xml:31:17-49
+71            <meta-data
+71-->[androidx.lifecycle:lifecycle-process:2.8.7] /Users/vejoe/.gradle/caches/8.9/transforms/ef3f1b8cf943e0590111f6b7a018d36f/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:29:13-31:52
+72                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+72-->[androidx.lifecycle:lifecycle-process:2.8.7] /Users/vejoe/.gradle/caches/8.9/transforms/ef3f1b8cf943e0590111f6b7a018d36f/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:30:17-78
+73                android:value="androidx.startup" />
+73-->[androidx.lifecycle:lifecycle-process:2.8.7] /Users/vejoe/.gradle/caches/8.9/transforms/ef3f1b8cf943e0590111f6b7a018d36f/transformed/lifecycle-process-2.8.7/AndroidManifest.xml:31:17-49
+74            <meta-data
+74-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/vejoe/.gradle/caches/8.9/transforms/4d07dd122260385b5a0f7c79a656e780/transformed/profileinstaller-1.3.1/AndroidManifest.xml:29:13-31:52
+75                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+75-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/vejoe/.gradle/caches/8.9/transforms/4d07dd122260385b5a0f7c79a656e780/transformed/profileinstaller-1.3.1/AndroidManifest.xml:30:17-85
+76                android:value="androidx.startup" />
+76-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/vejoe/.gradle/caches/8.9/transforms/4d07dd122260385b5a0f7c79a656e780/transformed/profileinstaller-1.3.1/AndroidManifest.xml:31:17-49
+77        </provider>
+78
+79        <receiver
+79-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/vejoe/.gradle/caches/8.9/transforms/4d07dd122260385b5a0f7c79a656e780/transformed/profileinstaller-1.3.1/AndroidManifest.xml:34:9-52:20
+80            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+80-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/vejoe/.gradle/caches/8.9/transforms/4d07dd122260385b5a0f7c79a656e780/transformed/profileinstaller-1.3.1/AndroidManifest.xml:35:13-76
+81            android:directBootAware="false"
+81-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/vejoe/.gradle/caches/8.9/transforms/4d07dd122260385b5a0f7c79a656e780/transformed/profileinstaller-1.3.1/AndroidManifest.xml:36:13-44
+82            android:enabled="true"
+82-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/vejoe/.gradle/caches/8.9/transforms/4d07dd122260385b5a0f7c79a656e780/transformed/profileinstaller-1.3.1/AndroidManifest.xml:37:13-35
+83            android:exported="true"
+83-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/vejoe/.gradle/caches/8.9/transforms/4d07dd122260385b5a0f7c79a656e780/transformed/profileinstaller-1.3.1/AndroidManifest.xml:38:13-36
+84            android:permission="android.permission.DUMP" >
+84-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/vejoe/.gradle/caches/8.9/transforms/4d07dd122260385b5a0f7c79a656e780/transformed/profileinstaller-1.3.1/AndroidManifest.xml:39:13-57
+85            <intent-filter>
+85-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/vejoe/.gradle/caches/8.9/transforms/4d07dd122260385b5a0f7c79a656e780/transformed/profileinstaller-1.3.1/AndroidManifest.xml:40:13-42:29
+86                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+86-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/vejoe/.gradle/caches/8.9/transforms/4d07dd122260385b5a0f7c79a656e780/transformed/profileinstaller-1.3.1/AndroidManifest.xml:41:17-91
+86-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/vejoe/.gradle/caches/8.9/transforms/4d07dd122260385b5a0f7c79a656e780/transformed/profileinstaller-1.3.1/AndroidManifest.xml:41:25-88
+87            </intent-filter>
+88            <intent-filter>
+88-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/vejoe/.gradle/caches/8.9/transforms/4d07dd122260385b5a0f7c79a656e780/transformed/profileinstaller-1.3.1/AndroidManifest.xml:43:13-45:29
+89                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+89-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/vejoe/.gradle/caches/8.9/transforms/4d07dd122260385b5a0f7c79a656e780/transformed/profileinstaller-1.3.1/AndroidManifest.xml:44:17-85
+89-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/vejoe/.gradle/caches/8.9/transforms/4d07dd122260385b5a0f7c79a656e780/transformed/profileinstaller-1.3.1/AndroidManifest.xml:44:25-82
+90            </intent-filter>
+91            <intent-filter>
+91-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/vejoe/.gradle/caches/8.9/transforms/4d07dd122260385b5a0f7c79a656e780/transformed/profileinstaller-1.3.1/AndroidManifest.xml:46:13-48:29
+92                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+92-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/vejoe/.gradle/caches/8.9/transforms/4d07dd122260385b5a0f7c79a656e780/transformed/profileinstaller-1.3.1/AndroidManifest.xml:47:17-88
+92-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/vejoe/.gradle/caches/8.9/transforms/4d07dd122260385b5a0f7c79a656e780/transformed/profileinstaller-1.3.1/AndroidManifest.xml:47:25-85
+93            </intent-filter>
+94            <intent-filter>
+94-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/vejoe/.gradle/caches/8.9/transforms/4d07dd122260385b5a0f7c79a656e780/transformed/profileinstaller-1.3.1/AndroidManifest.xml:49:13-51:29
+95                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+95-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/vejoe/.gradle/caches/8.9/transforms/4d07dd122260385b5a0f7c79a656e780/transformed/profileinstaller-1.3.1/AndroidManifest.xml:50:17-95
+95-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/vejoe/.gradle/caches/8.9/transforms/4d07dd122260385b5a0f7c79a656e780/transformed/profileinstaller-1.3.1/AndroidManifest.xml:50:25-92
+96            </intent-filter>
+97        </receiver>
+98    </application>
+99
+100</manifest>
